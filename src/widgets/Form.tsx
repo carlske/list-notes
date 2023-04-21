@@ -1,16 +1,17 @@
 import { useRef, useState } from "react";
+import { Note } from "../shared/interfaces/Note";
 
 function Form() {
-  const [notes, setNotes] = useState([]);
-  const titleRef = useRef("");
-  const descripRef = useRef("");
-  const statusRef = useRef(null);
+  const [notes, setNotes] = useState<Array<Note>>([]);
+  const titleRef = useRef<null | HTMLInputElement>(null);
+  const descripRef = useRef<null | HTMLInputElement>(null);
+  const statusRef = useRef<null | HTMLInputElement>(null);
 
   const addNoteEvent = () => {
-    const newElement = {
-      title: titleRef.current.value,
-      description: descripRef.current.value,
-      status: statusRef.current.checked,
+    const newElement: Note = {
+      title: titleRef.current?.value,
+      description: "",
+      status: statusRef.current?.checked,
     };
     console.log(newElement);
     console.log(notes);
@@ -26,7 +27,7 @@ function Form() {
         <br />
         <label>Description</label>
         <br />
-        <textarea ref={descripRef}></textarea>
+        <textarea></textarea>
         <br />
         <label>Status</label>
         <input type="checkbox" ref={statusRef} />
